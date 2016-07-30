@@ -75,7 +75,7 @@ class LGAC(object):
 
             if testBit(value, i - 1) != 0:
                 bitset = 0
-                setBit(bitset, (128 + i - pos - bits - 1) % 4)
+                bitset = setBit(bitset, (128 + i - pos - bits - 1) % 4)
                 self.crc = self.crc + bitset
 
             i -= 1
