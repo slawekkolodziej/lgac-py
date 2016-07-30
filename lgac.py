@@ -2,7 +2,7 @@
 Library that genrates LG air conditioner remote codes
 """
 
-from bit import setBit, testBit
+from bit import set_bit, test_bit
 
 FIRST_BYTE = 136 # b10001000
 
@@ -68,14 +68,14 @@ class LGAC(object):
             index = 2 + 2 * (pos + bits-i)
             self.codes[index] = ZERO_AND_ONE_HIGH
 
-            if testBit(value, i - 1) != 0:
+            if test_bit(value, i - 1) != 0:
                 self.codes[index + 1] = ONE_LOW
             else:
                 self.codes[index + 1] = ZERO_LOW
 
-            if testBit(value, i - 1) != 0:
+            if test_bit(value, i - 1) != 0:
                 bitset = 0
-                bitset = setBit(bitset, (128 + i - pos - bits - 1) % 4)
+                bitset = set_bit(bitset, (128 + i - pos - bits - 1) % 4)
                 self.crc = self.crc + bitset
 
             i -= 1
