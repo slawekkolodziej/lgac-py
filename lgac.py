@@ -78,12 +78,6 @@ class LGAC(object):
         self.fill_buffer(24, 4, self.crc)
         self.codes[BUFFER_SIZE - 1] = ZERO_AND_ONE_HIGH
 
-    def debug(self):
-        """
-        Dump buffer
-        """
-        print self.codes[0:BUFFER_SIZE]
-
     def fill_buffer(self, pos, bits, value):
         """
         Fill buffer
@@ -104,3 +98,10 @@ class LGAC(object):
                 self.crc = self.crc + bitset
 
             i -= 1
+
+
+    def debug(self):
+        """
+        Dump buffer
+        """
+        print self.codes[0:BUFFER_SIZE]
