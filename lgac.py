@@ -57,7 +57,7 @@ class LGAC(object):
         """
         Dump buffer
         """
-        print self.codes[0, BUFFER_SIZE]
+        print self.codes[0:BUFFER_SIZE]
 
     def fill_buffer(self, pos, bits, value):
         """
