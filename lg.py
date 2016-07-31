@@ -44,7 +44,7 @@ class Remote(object):
     """
 
     def __init__(self):
-        self.codes = []
+        self.codes = [0] * BUFFER_SIZE
         self.crc = 0
 
     def set_mode(self, mode, fan, temperature, state):
@@ -56,21 +56,21 @@ class Remote(object):
         self.crc = 0
 
         self.fill_buffer(0, 8, FIRST_BYTE)
-        self.fill_buffer(8, 5, state)
+        self.fill_buffer(8, 5, STATE[state])
 
-        if state == STATE['OFF']:
+        if state == 'OFF':
             self.fill_buffer(13, 3, MODE['NONE'])
         else:
             self.fill_buffer(13, 3, MODE[mode])
 
-        if state == STATE['OFF']:
+        if state == 'OFF':
             self.fill_buffer(16, 4, 0)
         else:
             self.fill_buffer(16, 4, temperature - TEMPERATURE_OFFSET)
 
         self.fill_buffer(20, 1, 0) # jet
 
-        if state == STATE['OFF']:
+        if state == 'OFF':
             self.fill_buffer(21, 3, FAN['NONE'])
         else:
             self.fill_buffer(21, 3, FAN[fan])
@@ -104,4 +104,5 @@ class Remote(object):
         """
         Dump buffer
         """
+        print "Debug:"
         print self.codes[0:BUFFER_SIZE]
