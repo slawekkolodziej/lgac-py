@@ -38,7 +38,7 @@ ONE_LOW = 1709
 
 BUFFER_SIZE = 59
 
-class LGAC(object):
+class Remote(object):
     """
     Library that genrates LG air conditioner remote codes
     """
