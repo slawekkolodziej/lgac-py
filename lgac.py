@@ -51,7 +51,32 @@ class LGAC(object):
         """
         Generate code and put it in the buffer
         """
-        pass
+        self.codes[0] = FIRST_HIGH
+        self.codes[1] = FIRST_LOW
+        self.crc = 0
+
+        self.fill_buffer(0, 8, FIRST_BYTE)
+        self.fill_buffer(8, 5, state)
+
+        if state == STATE['OFF']:
+            self.fill_buffer(13, 3, MODE['NONE'])
+        else:
+            self.fill_buffer(13, 3, MODE[mode])
+
+        if state == STATE['OFF']:
+            self.fill_buffer(16, 4, 0)
+        else:
+            self.fill_buffer(16, 4, temperature - TEMPERATURE_OFFSET)
+
+        self.fill_buffer(20, 1, 0) # jet
+
+        if state == STATE['OFF']:
+            self.fill_buffer(21, 3, FAN['NONE'])
+        else:
+            self.fill_buffer(21, 3, FAN[fan])
+
+        self.fill_buffer(24, 4, self.crc)
+        self.codes[BUFFER_SIZE - 1] = ZERO_AND_ONE_HIGH
 
     def debug(self):
         """
