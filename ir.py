@@ -2,6 +2,8 @@
 IRSend python mock
 """
 
+from datetime import datetime
+
 def send_raw():
     """
     void  IRsend::sendRaw (const unsigned int buf[],  unsigned int len,  unsigned int hz)
@@ -60,5 +62,17 @@ def enable_ir_out():
         OCR2A                = pwmval; \
         OCR2B                = pwmval / 3; \
     })
+    """
+    pass
+
+def custom_delay_usec(microseconds):
+    """
+    # if microseconds > 4:
+    #     start = datetime.now()
+    #     end = start + microseconds - 4;
+    #     if (endMicros < start) { // Check if overflow
+    #         while ( micros() > start ) {} // wait until overflow
+    #     }
+    #     while ( micros() < endMicros ) {} // normal wait
     """
     pass
